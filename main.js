@@ -1,12 +1,11 @@
-Vue.component('product', {
-	props: {
-		premium: {
-			type: Boolean,
-			requared: true,
-
-		}
-	},
-	template: `
+Vue.component("product", {
+  props: {
+    premium: {
+      type: Boolean,
+      requared: true,
+    },
+  },
+  template: `
 	<div class="container">
 		<div class="row">
 			<div class="sm-6">
@@ -34,7 +33,6 @@ Vue.component('product', {
 				<ul>
 					<li>$ {{ price }}</li>
 				</ul>
-
 				<button :disabled="quanity == 0"  @click="addQuanity" class="btn btn-dark">+</button>
 				<button class="btn">{{ quantitySelected }}</button>
 				<button :disabled="quantitySelected == 0" @click="cancelQuanity" class="btn btn-dark">-</button>
@@ -47,73 +45,66 @@ Vue.component('product', {
 			</div>
 		</div>
 	</div>
-	` ,
-	data() {
-		return {
-		title: 'T-Shirt',
-		image: 'img/g-star-raw-graphic--8-t-shirt-white-flat-back.jpg',
-		description: 'T-Shirt',
-		sizes: ['XS', 'S', 'M', 'L'],
-		details: ['100% cotton'],
-		colors: ['White', 'Black'],
-		quanity: 4,
-		quantitySelected: 0,
-		cart:  0,
-		fontColor: 'red',
-		price: '7.5',
-		variants: [
-		{
-			variantColor: 'White',
-			variantImage: 'img/g-star-raw-graphic--8-t-shirt-white-flat-back.jpg',
-			variantPrice: '7.5',
-			variantQuanity: 4
+	`,
+  data() {
+    return {
+      title: "T-Shirt",
+      image: "img/g-star-raw-graphic--8-t-shirt-white-flat-back.jpg",
+      description: "T-Shirt",
+      sizes: ["XS", "S", "M", "L"],
+      details: ["100% cotton"],
+      colors: ["White", "Black"],
+      quanity: 4,
+      quantitySelected: 0,
+      cart: 0,
+      fontColor: "red",
+      price: "7.5",
+      variants: [
+        {
+          variantColor: "White",
+          variantImage: "img/g-star-raw-graphic--8-t-shirt-white-flat-back.jpg",
+          variantPrice: "7.5",
+          variantQuanity: 4,
+        },
+        {
+          variantColor: "Black",
+          variantImage: "img/g-star-raw-t-shirt-black-model-side.jpg",
+          variantPrice: "8.1",
+          variantQuanity: 2,
+        },
+      ],
+    };
+  },
+  methods: {
+    variantSelected: function (variantImage, variantPrice) {
+      (this.image = variantImage), (this.price = variantPrice);
+    },
+    addCart: function () {
+      this.cart++;
+    },
+    addQuanity: function () {
+      this.quantitySelected++;
+      this.quanity--;
+    },
+    cancelQuanity: function () {
+      this.quantitySelected--;
+      this.quanity++;
+    },
+  },
 
-		},
-		{
-			variantColor: 'Black',
-			variantImage: 'img/g-star-raw-t-shirt-black-model-side.jpg',
-			variantPrice: '8.1',
-			variantQuanity: 2
+  computed: {
+    shipping() {
+      if (this.premium) {
+        return "Free";
+      }
+      return 2.99;
+    },
+  },
+});
 
-		}
-		]
-	}
-	} ,
-	methods: {
-		variantSelected: function (variantImage, variantPrice) {
-			this.image = variantImage, 
-			this.price = variantPrice
-		},
-		addCart: function() {
-			this.cart++
-		},
-		addQuanity: function () {
-			this.quantitySelected++;
-			this.quanity--
-		},
-		cancelQuanity: function () {
-			this.quantitySelected--;
-			this.quanity++
-		},
-		
-	},
-	
-	computed: {
-		shipping() {
-			if (this.premium) {
-				return "Free"
-			}
-			return 2.99
-		},
-
-	}
-})
-
-app = new Vue ({
-	el: '#app',
-	data: {
-		premium: true,
-	}
-})
-
-
+app = new Vue({
+  el: "#app",
+  data: {
+    premium: true,
+  },
+});

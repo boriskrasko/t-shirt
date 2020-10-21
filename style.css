@@ -1,11 +1,13 @@
-img{
+img {
 	width: 100%;
 }
-div{
+
+div {
 	margin-left: 5%;
 	margin-right: 5%;
 }
-.box-color{
+
+.box-color {
 	width: 50px;
 	height: 50px;
 	border: gray solid 1px;
